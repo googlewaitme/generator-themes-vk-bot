@@ -17,7 +17,7 @@ class DaVinchi:
 			top_p=1.0,
 			frequency_penalty=0.1,
 			presence_penalty=0.1,
-			stop=['6.']
+			stop=['16.']
 		)
 		if len(response['choices']) == 0:
 			return messages.BAD_RESULTAT_MESSAGE
@@ -39,7 +39,7 @@ class DaVinchi:
 
 	def send_question(self, question: str) -> str:
 		response = openai.Completion.create(
-			model="text-davinci-003",
+			model=self.model_name,
 			prompt=f"{question}",
 			temperature=0.3,
 			max_tokens=3000,
