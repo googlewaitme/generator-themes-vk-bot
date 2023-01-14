@@ -2,3 +2,4 @@ environs
 vkwave
 peewee
 openai
+redis
