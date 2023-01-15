@@ -38,15 +38,19 @@ class DaVinchi:
         return response['choices'][0]['text']
 
     def send_question(self, question: str) -> str:
+        params = {
+            "max_tokens": 2048,
+            "temperature": 0.3,
+            "top_p": 0.7,
+            "frequency_penalty": 0.2,
+            "presence_penalty": 0.1
+        }
         response = openai.Completion.create(
             model=self.model_name,
             prompt=f"{question}",
-            temperature=0.3,
-            max_tokens=2000,
-            top_p=1.0,
-            frequency_penalty=0.0,
-            presence_penalty=0.0
+            **params
         )
         if len(response['choices']) == 0:
             return messages.BAD_RESULTAT_MESSAGE
-        return response['choices'][0]['text']
+        result = str(params) + response['choices'][0]['text']
+        return result

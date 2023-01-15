@@ -37,6 +37,10 @@ CONTENT_PLAN_BACK_BUTTON = "Ещё темы"
 NEW_ARTICLE_BACK_BUTTON = "Новый вариант"
 
 
+SANDBOX_HELLO_MESSAGE = """Ты запустил песочницу. Чтобы выйти пиши /menu.
+
+Теперь каждое твоё сообщение воспринимается как вопрос."""
+
 # --- CAPTCHA ---
 
 CAPTCHA_IS_RIGHT = "Поздравляю ты не робот!"

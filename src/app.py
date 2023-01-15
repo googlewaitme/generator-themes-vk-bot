@@ -11,6 +11,7 @@ from middlewares.spam_control import SpamControlMiddleware
 
 from blueprints import (menu_router,
                         back_router,
+                        sandbox_router,
                         new_article_router,
                         new_content_plan_router)
 from db import models
@@ -35,6 +36,7 @@ bot.middleware_manager.add_middleware(UserMiddleware())
 
 bot.dispatcher.add_router(back_router)
 
+bot.dispatcher.add_router(sandbox_router)
 bot.dispatcher.add_router(new_article_router)
 bot.dispatcher.add_router(new_content_plan_router)
 
