@@ -8,6 +8,7 @@ from da_vinchi import DaVinchi
 import config
 from middlewares.user_data_middleware import UserMiddleware
 from middlewares.spam_control import SpamControlMiddleware
+from middlewares.referal_system_middleware import ReferalSystemMiddleware
 
 from blueprints import (menu_router,
                         back_router,
@@ -28,10 +29,9 @@ spam_controller = redis.Redis(
     db=1
 )
 
-models.create_tables()
-
 bot.middleware_manager.add_middleware(SpamControlMiddleware(spam_controller))
 bot.middleware_manager.add_middleware(UserMiddleware())
+bot.middleware_manager.add_middleware(ReferalSystemMiddleware())
 
 
 bot.dispatcher.add_router(back_router)
