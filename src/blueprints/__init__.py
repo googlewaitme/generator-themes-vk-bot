@@ -1,4 +1,6 @@
 from blueprints.sandbox_handler import sandbox_router
+from blueprints.referal_system import referal_system_router
+
 from blueprints.generate_new_article import new_article_router
 from blueprints.generate_content_plan import new_content_plan_router
 

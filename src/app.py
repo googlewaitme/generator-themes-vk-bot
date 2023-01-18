@@ -13,9 +13,9 @@ from middlewares.referal_system_middleware import ReferalSystemMiddleware
 from blueprints import (menu_router,
                         back_router,
                         sandbox_router,
+                        referal_system_router,
                         new_article_router,
                         new_content_plan_router)
-from db import models
 
 
 logging.basicConfig(level=logging.INFO)
@@ -37,6 +37,8 @@ bot.middleware_manager.add_middleware(ReferalSystemMiddleware())
 bot.dispatcher.add_router(back_router)
 
 bot.dispatcher.add_router(sandbox_router)
+bot.dispatcher.add_router(referal_system_router)
+
 bot.dispatcher.add_router(new_article_router)
 bot.dispatcher.add_router(new_content_plan_router)
 

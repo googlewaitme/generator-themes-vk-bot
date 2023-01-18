@@ -1,3 +1,4 @@
+import config
 
 # &&&     Messages    &&& 
 START_MESSAGE = """Привет, {name}!
@@ -46,3 +47,11 @@ SANDBOX_HELLO_MESSAGE = """Ты запустил песочницу. Чтобы 
 CAPTCHA_IS_RIGHT = "Поздравляю ты не робот!"
 CAPTCHA_QUESTION = "Проверка, что ты не робот\n{}"
 CAPTCHA_TEMPLATE = "{first_value}{operation}{second_value}="
+
+
+# --- REFERAL ---
+
+REFERAL_URL_TEMPLATE = "vk.me/" + config.VK_GROUP_NAME
+REFERAL_URL_TEMPLATE += "?ref={ref}&ref_source={ref_source}"
+
+MESSAGE_WITH_REFERAL_URL_TEMP = "Твоя реферальная ссылка\n\n{url}"
