@@ -9,7 +9,7 @@ class UserMiddleware(BaseMiddleware):
     async def pre_process_event(self, event: BotEvent) -> MiddlewareResult:
         user_id = event.object.object.message.from_id
 
-        user = User.get_or_none(User.user_id==user_id)
+        user = User.get_or_none(User.user_id == user_id)
 
         if user is None:
             user_data = await event.api_ctx.users.get(user_ids=user_id)

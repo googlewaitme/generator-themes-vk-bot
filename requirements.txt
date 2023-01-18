@@ -1,5 +1,6 @@
 environs
 vkwave
 peewee
+peewee-migrate
 openai
 redis
