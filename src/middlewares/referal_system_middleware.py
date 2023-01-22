@@ -8,5 +8,6 @@ class ReferalSystemMiddleware(BaseMiddleware):
             user = event['current_user']
             if user.referal_code is None:
                 user.referal_code = message.ref
+                user.referal_source = message.ref_source
                 user.save()
         return MiddlewareResult(True)
