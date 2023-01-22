@@ -17,6 +17,7 @@ class User(BaseModel):
     loggin_date = DateTimeField()
     registration_date = DateTimeField()
     referal_code = CharField(null=True)
+    referal_source = CharField(null=True)
 
 
 class TokenOperation(BaseModel):
@@ -32,3 +33,10 @@ class MonetaryTransaction(BaseModel):
     created_at = DateTimeField(default=dt.datetime.now())
     money_count = IntegerField()
     transaction_purpose = CharField()
+
+
+class Subscription(BaseModel):
+    user = ForeignKeyField(User, on_delete='cascade', backref='subscriptions')
+    expired_at = DateTimeField()
+    start_at = DateTimeField()
+    subscription_method = CharField(null=True)  # buy or free
