@@ -4,3 +4,4 @@ peewee
 peewee-migrate
 openai
 redis
+sentry_sdk
