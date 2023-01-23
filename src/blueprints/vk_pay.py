@@ -5,9 +5,9 @@ from vkwave.bots import (
     simple_bot_handler,
     CommandsFilter,
     FiniteStateMachine,
-    filters
 )
 
+from vkwave.bots.core.dispatching import filters
 import messages
 from utils.constants import VK_PAY_TEST_KEYBOARD
 
@@ -16,7 +16,7 @@ vk_pay_router = DefaultRouter()
 fsm = FiniteStateMachine()
 
 
-@simple_bot_handler(
+@simple_bot_message_handler(
     vk_pay_router, filters.EventTypeFilter("vkpay_transaction"))
 async def send_about_getted_sum(event: SimpleBotEvent):
     # TODO me
