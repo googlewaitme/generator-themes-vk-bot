@@ -30,6 +30,13 @@ class DaVinchi:
         self.model_name = 'text-davinci-003'
 
     @openai_errors
+    def send_request(self, **kwargs):
+        response = openai.Completion.create(**kwargs)
+        if len(response['choices']) == 0:
+            return messages.BAD_RESULTAT_MESSAGE
+        return response['choices'][0]['text']
+
+    @openai_errors
     def get_content_plan_by_theme(self, theme: str) -> str:
         response = openai.Completion.create(
             model=self.model_name,

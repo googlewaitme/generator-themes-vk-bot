@@ -6,7 +6,7 @@ import config
 MENU_KB = Keyboard(inline=True)
 MENU_KB.add_text_button(
     text=messages.CREATE_CONTENT_PLAN_BUTTON,
-    payload={"command": "create_content_plan"},
+    payload={"create_content_plan": ""},
     color=ButtonColor.POSITIVE
 )
 MENU_KB.add_row()
