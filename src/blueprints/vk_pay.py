@@ -1,18 +1,11 @@
-import json
-
 from vkwave.bots import (
     DefaultRouter,
     SimpleBotEvent,
     simple_bot_message_handler,
     simple_bot_handler,
-    PayloadFilter,
     CommandsFilter,
     FiniteStateMachine,
-    State,
-    ForWhat,
-    StateFilter,
-    PayloadContainsFilter,
-    Keyboard,
+    filters
 )
 
 import messages
@@ -23,8 +16,11 @@ vk_pay_router = DefaultRouter()
 fsm = FiniteStateMachine()
 
 
-class CoinState:
-    user_input = State("input")
+@simple_bot_handler(
+    vk_pay_router, filters.EventTypeFilter("vkpay_transaction"))
+async def send_about_getted_sum(event: SimpleBotEvent):
+    # TODO me
+    return await event.answer(message='getted sum money')
 
 
 @simple_bot_message_handler(vk_pay_router, CommandsFilter('test_vk_pay'))
