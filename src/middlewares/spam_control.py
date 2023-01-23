@@ -24,7 +24,7 @@ class SpamControlMiddleware(BaseMiddleware):
 
     async def pre_process_event(self, event: BotEvent) -> MiddlewareResult:
         self.event = event
-        self.user_id = event.object.object.message.from_id
+        self.user_id = event['user_id']
         self.message_text = event.object.object.message.text
         self.captcha_key = "captcha_" + str(self.user_id)
 
@@ -47,7 +47,7 @@ class SpamControlMiddleware(BaseMiddleware):
         if not self.message_text.isdigit():
             await self.send_captcha()
             return MiddlewareResult(False)
-        if int(self.message_text)!=int(right_answer):
+        if int(self.message_text) != int(right_answer):
             await self.send_captcha()
             return MiddlewareResult(False)
         self.spam_controller.setex(
@@ -63,12 +63,12 @@ class SpamControlMiddleware(BaseMiddleware):
         self.spam_controller.set(self.captcha_key, value=self.captcha_answer)
 
     def generate_captcha(self):
-        symbol_operation, operation=random.choice(self.OPERATIONS)
+        symbol_operation, operation = random.choice(self.OPERATIONS)
 
-        a=random.randint(self.MIN_INT, self.MAX_INT)
-        b=random.randint(self.MIN_INT, a)
+        a = random.randint(self.MIN_INT, self.MAX_INT)
+        b = random.randint(self.MIN_INT, a)
 
-        self.captcha_question=messages.CAPTCHA_TEMPLATE.format(
+        self.captcha_question = messages.CAPTCHA_TEMPLATE.format(
             first_value=a,
             second_value=b,
             operation=symbol_operation)

@@ -1,4 +1,3 @@
-import typing
 from vkwave.bots import BaseMiddleware, BotEvent, MiddlewareResult
 
 from db.models import User
@@ -7,7 +6,7 @@ from datetime import datetime
 
 class UserMiddleware(BaseMiddleware):
     async def pre_process_event(self, event: BotEvent) -> MiddlewareResult:
-        user_id = event.object.object.message.from_id
+        user_id = event['user_id']
 
         user = User.get_or_none(User.user_id == user_id)
 

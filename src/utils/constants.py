@@ -1,5 +1,6 @@
 from vkwave.bots import Keyboard, ButtonColor
 import messages
+import config
 
 
 MENU_KB = Keyboard(inline=True)
@@ -29,3 +30,8 @@ BACK_MENU_KB.add_text_button(
     payload={'command': 'menu'},
     color=ButtonColor.NEGATIVE
 )
+
+
+VK_PAY_TEST_KEYBOARD = Keyboard(inline=True)
+VK_PAY_TEST_KEYBOARD.add_vkpay_button_pay_to_group(
+    1, config.VK_GROUP_ID, description="for cockies")

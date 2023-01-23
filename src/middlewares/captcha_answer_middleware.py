@@ -9,7 +9,7 @@ class SpamControlMiddleware(BaseMiddleware):
         self.spam_controller = spam_controller
 
     async def pre_process_event(self, event: BotEvent) -> MiddlewareResult:
-        user_id = event.object.object.message.from_id
+        user_id = event['user_id']
         one_hour_delta = timedelta(hours=1)
 
         if self.spam_controller.exists(user_id):
