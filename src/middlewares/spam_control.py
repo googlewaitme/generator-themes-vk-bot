@@ -1,5 +1,9 @@
 import logging
-from vkwave.bots import BaseMiddleware, BotEvent, MiddlewareResult
+from vkwave.bots import (
+    BaseMiddleware,
+    BotEvent,
+    MiddlewareResult)
+from vkwave.types.bot_events import BotEventType
 
 from datetime import timedelta
 
@@ -23,6 +27,8 @@ class SpamControlMiddleware(BaseMiddleware):
         self.one_hour_delta = timedelta(hours=1)
 
     async def pre_process_event(self, event: BotEvent) -> MiddlewareResult:
+        if event.object.type != BotEventType.MESSAGE_NEW:
+            return MiddlewareResult(True)
         self.event = event
         self.user_id = event['user_id']
         self.message_text = event.object.object.message.text
