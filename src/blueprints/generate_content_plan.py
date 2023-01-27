@@ -12,6 +12,8 @@ from vkwave.bots import (
     Keyboard,
 )
 
+from vkwave.bots.core.dispatching.filters import builtin
+
 from skills.skills import content_plan_skill
 import messages
 
@@ -46,13 +48,28 @@ async def send_new_content_plan(event: SimpleBotEvent):
 @simple_bot_message_handler(
     new_content_plan_router,
     StateFilter(
-        fsm=fsm, state=SkillState.user_input, for_what=ForWhat.FOR_USER)
+        fsm=fsm, state=SkillState.user_input, for_what=ForWhat.FOR_USER),
+    lambda event: builtin.get_payload(event) is None
 )
 async def send_generated_article(event: SimpleBotEvent):
     theme = event.object.object.message.text
     if not theme:
         return await event.answer(message="Необходимо ввести текст")
+    if len(theme) > content_plan_skill.max_len_request:
+        return await event.answer(
+            message="Слишком длинный запрос для данного навыка")
     return await send_content_plan_by_theme(event, theme)
+
+
+@simple_bot_message_handler(
+    new_content_plan_router,
+    StateFilter(
+        fsm=fsm, state=SkillState.user_input, for_what=ForWhat.FOR_USER))
+async def send_error_message_about_buttons(event: SimpleBotEvent):
+    return await event.answer(
+        message=content_plan_skill.request_for_skill_description,
+        keyboard=Keyboard.get_empty_keyboard(),
+    )
 
 
 async def send_content_plan_by_theme(event: SimpleBotEvent, theme: str):

@@ -3,7 +3,7 @@ import messages
 
 
 def get_key_for_skills(button_again_name: str, payload):
-    key = Keyboard(inline=True)
+    key = Keyboard(inline=True, one_time=True)
     key.add_text_button(
         text=messages.MAIN_MENU_BUTTON,
         payload={"command": "menu"},

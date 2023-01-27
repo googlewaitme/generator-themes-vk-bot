@@ -12,7 +12,8 @@ class Skill:
             openai_data: dict,
             prompt_template: str,
             button_name: str,
-            restart_button_name: str):
+            restart_button_name: str,
+            max_len_request: int = 100):
         self.short_name = short_name
         self.verbose_name = verbose_name
         self.name = name
@@ -24,6 +25,8 @@ class Skill:
         self.button_name = button_name
         self.restart_button_name = restart_button_name
         self.prompt_template = prompt_template
+
+        self.max_len_request = max_len_request
 
     def set_request(self, request: str):
         self.send_request_openai(request)
