@@ -1,7 +1,7 @@
 environs
 vkwave
 peewee
-peewee-migrate
+peewee_migrate
 openai
 redis
 sentry_sdk
